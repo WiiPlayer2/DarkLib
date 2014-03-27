@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarkLib", "DarkLib\DarkLib.csproj", "{6BDDEDDA-1D1E-44A9-926C-B459B96AB4ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{521F8AE8-7C6E-4F6C-B20C-8C7F4C18907E}"
+EndProject
+Global
+	GlobalSection(CodealikeProperties) = postSolution
+		SolutionGuid = f3fa6331-bba7-44c8-9c1d-f6bd50966f1a
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BDDEDDA-1D1E-44A9-926C-B459B96AB4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BDDEDDA-1D1E-44A9-926C-B459B96AB4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BDDEDDA-1D1E-44A9-926C-B459B96AB4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BDDEDDA-1D1E-44A9-926C-B459B96AB4ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{521F8AE8-7C6E-4F6C-B20C-8C7F4C18907E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521F8AE8-7C6E-4F6C-B20C-8C7F4C18907E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521F8AE8-7C6E-4F6C-B20C-8C7F4C18907E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521F8AE8-7C6E-4F6C-B20C-8C7F4C18907E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
