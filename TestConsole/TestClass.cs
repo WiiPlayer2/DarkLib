@@ -21,6 +21,8 @@ namespace TestConsole
         [Testing]
         public void Test()
         {
+            field2.DebugFields();
+            field6.DebugFields();
         }
     }
 }

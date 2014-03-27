@@ -12,20 +12,20 @@ namespace TestConsole
     {
         static void Main(string[] args)
         {
-            var test = new TestClass();
-            test.DebugFields(ObjectExtension.ALL_MEMBERS);
-            Console.ReadKey(true);
+            //var test = new TestClass();
+            //test.DebugFields(ObjectExtension.ALL_MEMBERS);
+            //Console.ReadKey(true);
 
-            var process = Process.GetCurrentProcess();
-            process.InitCpuUsage();
-            while (true)
-            {
-                var usage = process.GetCpuUsage();
-                Console.WriteLine(usage * 100);
-                Console.ReadKey(true);
-            }
+            //var process = Process.GetCurrentProcess();
+            //process.InitCpuUsage();
+            //while (true)
+            //{
+            //    var usage = process.GetCpuUsage();
+            //    Console.WriteLine(usage * 100);
+            //    Console.ReadKey(true);
+            //}
 
-            var t = new GenericTestClass<string>();
+            //var t = new GenericTestClass<string>();
         }
     }
 }
