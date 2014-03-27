@@ -1,30 +1,60 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="StreamExtension.cs" company="DarkInc">
+//     Copyright (c) DarkInc, WiiPlayer2 (Waldemar Tomme). All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+using System;
 using System.Text;
 
 namespace System.IO
 {
+    /// <summary>
+    /// Contains extension methods for <see cref="System.IO.Stream"/>
+    /// </summary>
     public static class StreamExtension
     {
-        public static string GetString(this Stream @Stream)
+        /// <summary>
+        /// Gets the string.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns>Containing string</returns>
+        public static string GetString(this Stream stream)
         {
-            return GetString(@Stream, Encoding.Default);
+            return GetString(stream, Encoding.Default);
         }
 
-        public static string GetString(this Stream @Stream, Encoding encoding)
+        /// <summary>
+        /// Gets the string with the given encoding.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="encoding">The encoding.</param>
+        /// <returns>Containing string</returns>
+        public static string GetString(this Stream stream, Encoding encoding)
         {
-            var reader = new StreamReader(@Stream, encoding);
+            var reader = new StreamReader(stream, encoding);
             return reader.ReadToEnd();
         }
 
-        public static void SetString(this Stream @Stream, string value)
+        /// <summary>
+        /// Sets the string.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="value">The string.</param>
+        public static void SetString(this Stream stream, string value)
         {
-            SetString(@Stream, value, Encoding.Default);
+            SetString(stream, value, Encoding.Default);
         }
 
-        public static void SetString(this Stream @Stream, string value, Encoding encoding)
+        /// <summary>
+        /// Sets the string with the given encoding.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <param name="value">The string.</param>
+        /// <param name="encoding">The encoding.</param>
+        public static void SetString(this Stream stream, string value, Encoding encoding)
         {
             var bytes = encoding.GetBytes(value);
-            @Stream.Write(bytes, 0, bytes.Length);
+            stream.Write(bytes, 0, bytes.Length);
         }
     }
 }
