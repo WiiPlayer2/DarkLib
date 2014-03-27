@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DarkLib;
 
 namespace TestConsole
 {
@@ -18,7 +17,7 @@ namespace TestConsole
         private static int field6 = 69;
         internal static bool field7 = true;
 
-        [Testing]
+        //[Testing]
         public void Test()
         {
             field2.DebugFields();
