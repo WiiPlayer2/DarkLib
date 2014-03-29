@@ -41,6 +41,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diagnostics\ProcessExtension.cs" />
+    <Compile Include="Drawing\ColorExtension.cs" />
+    <Compile Include="Drawing\HsvColor.cs" />
     <Compile Include="Int64Extension.cs" />
     <Compile Include="IO\StreamExtension.cs" />
     <Compile Include="Net\HttpWebRequestExtension.cs" />

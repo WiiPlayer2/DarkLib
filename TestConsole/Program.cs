@@ -26,6 +26,9 @@ namespace TestConsole
             //}
 
             //var t = new GenericTestClass<string>();
+
+            var s = "test";
+            StringExtension.IndexOfAny(s, new[] { "test" });
         }
     }
 }
