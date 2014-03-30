@@ -25,19 +25,73 @@ namespace System.Drawing
         /// <param name="y">The y.</param>
         public static void CopyTo(this Bitmap bitmap, Bitmap toBitmap, int x, int y)
         {
-            for (var xs = 0; xs < bitmap.Width; xs++)
+            CopyTo(bitmap, toBitmap, 0, 0, bitmap.Width, bitmap.Height, x, y);
+        }
+
+        /// <summary>
+        /// Copies to.
+        /// </summary>
+        /// <param name="bitmap">The bitmap.</param>
+        /// <param name="toBitmap">To bitmap.</param>
+        /// <param name="sourceX">The x source.</param>
+        /// <param name="sourceY">The y source.</param>
+        /// <param name="sourceWidth">The width source.</param>
+        /// <param name="sourceHeight">The height source.</param>
+        /// <param name="destinationX">The x destination.</param>
+        /// <param name="destinationY">The y destination.</param>
+        public static void CopyTo(this Bitmap bitmap, Bitmap toBitmap, int sourceX, int sourceY, int sourceWidth, int sourceHeight, int destinationX, int destinationY)
+        {
+            for (var xs = sourceX; xs < sourceWidth + sourceX; xs++)
             {
-                for (var ys = 0; ys < bitmap.Height; ys++)
+                for (var ys = sourceY; ys < sourceHeight + sourceY; ys++)
                 {
-                    if (xs + x < toBitmap.Width
-                        && xs + x >= 0
-                        && ys + y < toBitmap.Height
-                        && ys + y >= 0)
+                    if (xs + destinationX < toBitmap.Width
+                        && xs + destinationX >= 0
+                        && ys + destinationY < toBitmap.Height
+                        && ys + destinationY >= 0)
                     {
-                        toBitmap.SetPixel(xs + x, ys + y, bitmap.GetPixel(xs, ys));
+                        toBitmap.SetPixel(xs + destinationX, ys + destinationY, bitmap.GetPixel(xs, ys));
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Mirrors the vertical.
+        /// </summary>
+        /// <param name="bitmap">The bitmap.</param>
+        /// <returns>The mirrored bitmap.</returns>
+        public static Bitmap MirrorVertical(this Bitmap bitmap)
+        {
+            var ret = new Bitmap(bitmap.Width, bitmap.Height);
+            for (var x = 0; x < bitmap.Width; x++)
+            {
+                for (var y = 0; y < bitmap.Height; y++)
+                {
+                    ret.SetPixel(x, bitmap.Height - 1 - y, bitmap.GetPixel(x, y));
+                }
+            }
+
+            return ret;
+        }
+
+        /// <summary>
+        /// Mirrors the horizontal.
+        /// </summary>
+        /// <param name="bitmap">The bitmap.</param>
+        /// <returns>The mirrored bitmap.</returns>
+        public static Bitmap MirrorHorizontal(this Bitmap bitmap)
+        {
+            var ret = new Bitmap(bitmap.Width, bitmap.Height);
+            for (var x = 0; x < bitmap.Width; x++)
+            {
+                for (var y = 0; y < bitmap.Height; y++)
+                {
+                    ret.SetPixel(bitmap.Width - x - 1, y, bitmap.GetPixel(x, y));
+                }
+            }
+
+            return ret;
         }
     }
 }
