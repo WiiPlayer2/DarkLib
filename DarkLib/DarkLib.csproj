@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Diagnostics\ProcessExtension.cs" />
+    <Compile Include="Drawing\BitmapExtension.cs" />
     <Compile Include="Drawing\ColorExtension.cs" />
     <Compile Include="Drawing\HsvColor.cs" />
     <Compile Include="Int64Extension.cs" />
