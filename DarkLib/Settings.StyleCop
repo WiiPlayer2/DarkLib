@@ -1,6 +1,9 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
     <BooleanProperty Name="ViolationsAsErrors">True</BooleanProperty>
+    <CollectionProperty Name="RecognizedWords">
+      <Value>overidable</Value>
+    </CollectionProperty>
   </GlobalSettings>
   <Analyzers>
     <Analyzer AnalyzerId="StyleCop.CSharp.OrderingRules">

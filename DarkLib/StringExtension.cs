@@ -311,5 +311,25 @@ namespace System
                 return -1;
             }
         }
+
+        /// <summary>
+        /// Replaces all chars for the given char.
+        /// </summary>
+        /// <param name="string">The string.</param>
+        /// <param name="oldChars">The old chars.</param>
+        /// <param name="newChar">The new char.</param>
+        /// <returns>The modified string.</returns>
+        public static string Replace(this string @string, char[] oldChars, char newChar)
+        {
+            var arr = @string.ToCharArray();
+            for (var i = 0; i < arr.Length; i++)
+            {
+                if (oldChars.Contains(arr[i]))
+                {
+                    arr[i] = newChar;
+                }
+            }
+            return new string(arr);
+        }
     }
 }

@@ -67,7 +67,7 @@ namespace System
             {
                 if (prop.CanRead)
                 {
-                    Debug.WriteLine("{0}\t{1}\t= {2}", prop.PropertyType, prop.Name, prop.GetValue(@object));
+                    Debug.WriteLine("{0}\t{1}\t= {2}", prop.PropertyType, prop.Name, prop.GetValue(@object, null));
                 }
                 else
                 {
