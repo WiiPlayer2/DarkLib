@@ -57,6 +57,7 @@
     <Compile Include="Drawing\HsvColor.cs" />
     <Compile Include="Int64Extension.cs" />
     <Compile Include="IO\BinaryReaderEx.cs" />
+    <Compile Include="IO\NotBlockingFileStream.cs" />
     <Compile Include="IO\StreamExtension.cs" />
     <Compile Include="IO\StreamSplitter.cs" />
     <Compile Include="Net\HttpWebRequestExtension.cs" />
