@@ -331,5 +331,16 @@ namespace System
             }
             return new string(arr);
         }
+
+        /// <summary>
+        /// Truncates the string.
+        /// </summary>
+        /// <param name="string">The string.</param>
+        /// <param name="maxLength">The max length.</param>
+        /// <returns>The truncated string.</returns>
+        public static string Truncate(this string @string, int maxLength)
+        {
+            return @string.Substring(0, Math.Min(@string.Length, maxLength));
+        }
     }
 }

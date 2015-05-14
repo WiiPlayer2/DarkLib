@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace System.IO
 {
@@ -14,6 +15,8 @@ namespace System.IO
         private FileStream stream;
         private long length;
         private long position;
+        private Mutex mutex;
+        private MemoryStream waitingData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotBlockingFileStream"/> class.
@@ -22,6 +25,8 @@ namespace System.IO
         public NotBlockingFileStream(string filename)
         {
             Filename = filename;
+            mutex = new Mutex();
+            waitingData = new MemoryStream();
         }
 
         /// <summary>
@@ -127,22 +132,33 @@ namespace System.IO
         /// </returns>
         public override int Read(byte[] buffer, int offset, int count)
         {
-            var wasOpen = stream != null;
-            if (!wasOpen)
+            mutex.WaitOne();
+
+            int ret = -1;
+            try
             {
-                stream = File.Open(Filename, FileMode.OpenOrCreate);
-                stream.Position = position;
+                var wasOpen = stream != null;
+                if (!wasOpen)
+                {
+                    stream = File.Open(Filename, FileMode.OpenOrCreate);
+                    stream.Position = position;
+                }
+
+                ret = stream.Read(buffer, offset, count);
+                Refresh();
+
+                if (!wasOpen)
+                {
+                    stream.Close();
+                    stream = null;
+                }
+            }
+            catch (Exception e)
+            {
+
             }
 
-            var ret = stream.Read(buffer, offset, count);
-            Refresh();
-
-            if (!wasOpen)
-            {
-                stream.Close();
-                stream = null;
-            }
-
+            mutex.ReleaseMutex();
             return ret;
         }
 
@@ -156,6 +172,7 @@ namespace System.IO
         /// </returns>
         public override long Seek(long offset, SeekOrigin origin)
         {
+            mutex.WaitOne();
             if (stream != null)
             {
                 stream.Seek(offset, origin);
@@ -176,6 +193,7 @@ namespace System.IO
                         break;
                 }
             }
+            mutex.ReleaseMutex();
             return position;
         }
 
@@ -197,20 +215,36 @@ namespace System.IO
         /// <param name="count">Die Anzahl an Bytes, die in den aktuellen Stream geschrieben werden sollen.</param>
         public override void Write(byte[] buffer, int offset, int count)
         {
-            if (stream == null)
+            mutex.WaitOne();
+            try
             {
-                stream = File.Open(Filename, FileMode.OpenOrCreate);
-                stream.Position = position;
-            }
+                if (stream == null)
+                {
+                    stream = File.Open(Filename, FileMode.OpenOrCreate);
+                    stream.Position = position;
+                }
 
-            stream.Write(buffer, offset, count);
-            Refresh();
+                var tmp = waitingData.ToArray();
+                stream.Write(tmp, 0, tmp.Length);
+                waitingData.Close();
+                waitingData = new MemoryStream();
+
+                stream.Write(buffer, offset, count);
+                Refresh();
+            }
+            catch (Exception e)
+            {
+                waitingData.Write(buffer, offset, count);
+            }
+            mutex.ReleaseMutex();
         }
 
         private void Refresh()
         {
+            mutex.WaitOne();
             position = stream.Position;
             length = stream.Length;
+            mutex.ReleaseMutex();
         }
     }
 }

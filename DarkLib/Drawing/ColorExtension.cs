@@ -33,5 +33,21 @@ namespace System.Drawing
 
             return HsvColor.FromAhsv(alpha, hue, saturation, value);
         }
+
+        /// <summary>
+        /// Calculates the distance to another color.
+        /// </summary>
+        /// <param name="thisColor">Color of the this.</param>
+        /// <param name="color">The color.</param>
+        /// <returns></returns>
+        public static double DistanceTo(this Color thisColor, Color color)
+        {
+            double a = thisColor.A - color.A;
+            double r = thisColor.R - color.R;
+            double g = thisColor.G - color.G;
+            double b = thisColor.B - color.B;
+            var distanceSquared = a * a + r * r + g * g + b * b;
+            return Math.Sqrt(distanceSquared);
+        }
     }
 }
